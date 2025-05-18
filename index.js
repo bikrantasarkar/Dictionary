@@ -25,18 +25,51 @@ function getDictionaryWord()
 }
 
 
-function WriteDefinition()
+function WriteDefinition(updated_text)
 {
-        var proper_meaning=`Meaning:${meaning}`
-        document.getElementById("def").innerText=proper_meaning;
+    document.getElementById("definition").innerText=updated_text;
 }
 
 function ProcessData(data)
 {
-    meaning=data[0].meanings[0].definitions[0].definition;
-    console.log("meaning:",meaning);
-    if(meaning)
-    WriteDefinition()
+    var all_meanings="";
+    var word=null,phonetic=null;
+    if(data && data[0])
+    {
+        if(data[0].word)
+        {
+             word=data[0].word;
+        }
+        if(data[0].phonetic)
+        {
+            phonetic=data[0].phonetic;
+        }
+        
+        if(data[0].meanings)
+        {
+            let meanings=data[0].meanings;
+            meanings.forEach(meaning => {
+                if(meaning.partOfSpeech)
+                {
+                    all_meanings=all_meanings+`${meaning.partOfSpeech} \n`;
+                }
+                if(meaning.definitions)
+                {
+                    console.log(meaning.definitions);
+                    let definitions=meaning.definitions;
+                    definitions.forEach((definition,index)=>{
+                        all_meanings=all_meanings+`${index}. ${definition.definition} \n`;
+                    });
+                }
+                   
+
+            });
+        }
+    }
+    
+    var final_text=`Word:${word}\n Phonetic:${phonetic} \n`+all_meanings;
+    WriteDefinition(final_text);
+
 }
 
 function handleSearch()
@@ -45,8 +78,7 @@ function handleSearch()
 }
 
 document.getElementById("search-click").addEventListener("click",()=>{
-    andleSearch();
-
+    handleSearch();
 });
 
 
