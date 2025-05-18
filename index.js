@@ -1,13 +1,8 @@
 console.log("js loaded!");
-
-var search_term="";
-var definition="";
-var meaning="";
-
-document.getElementById("search-click").addEventListener("click",()=>{
+function getDictionaryWord()
+{
     const query=document.getElementById("search-term").value;
     console.log("search term:",query);
-    search_term=query;
 
     if (!query.trim()) {
             alert("Please enter a word");
@@ -21,24 +16,37 @@ document.getElementById("search-click").addEventListener("click",()=>{
     })
     .then(data=>{
         console.log("data:",data);
-        // console.log(data.)
-        meaning=data[0].meanings[0].definitions[0].definition;
-        console.log("meaning:",meaning);
-        WriteDefinition()
+        ProcessData(data)
+        
     })
     .catch(error => {
             console.error("Fetch error:", error);
         });
+}
 
-});
 
 function WriteDefinition()
 {
-    if(search_term && meaning)
-    {
         var proper_meaning=`Meaning:${meaning}`
         document.getElementById("def").innerText=proper_meaning;
-    }
 }
+
+function ProcessData(data)
+{
+    meaning=data[0].meanings[0].definitions[0].definition;
+    console.log("meaning:",meaning);
+    if(meaning)
+    WriteDefinition()
+}
+
+function handleSearch()
+{
+    getDictionaryWord();
+}
+
+document.getElementById("search-click").addEventListener("click",()=>{
+    andleSearch();
+
+});
 
 
