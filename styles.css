@@ -1,3 +1,8 @@
+
+#makeSentence{
+  border: 3px solid orange;
+}
+
 #dictionary{
     height: auto;
     width: auto;
@@ -8,8 +13,6 @@
   align-items: center;
   flex-direction:column
 }
-
-
 
 .searchbar{
   border: 3px solid red;
@@ -32,3 +35,4 @@
 .definitions{
   border: 3px solid blue;
 }
+

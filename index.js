@@ -1,4 +1,16 @@
 console.log("js loaded!");
+
+function showMakeSentence()
+{
+    const makeSentence=document.getElementById('makeSentence');
+    makeSentence.style.display="block";
+}
+
+function hideMakeSentence()
+{
+    const makeSentence=document.getElementById('makeSentence');
+    makeSentence.style.display="none";
+}
 function getDictionaryWord()
 {
     const query=document.getElementById("search-term").value;
@@ -72,6 +84,10 @@ function ProcessData(data)
                 }
             });
         }
+    }
+    if(word)
+    {
+        showMakeSentence();
     }
 }
 
