@@ -15,8 +15,7 @@ function getDictionaryWord()
         return res.json();
     })
     .then(data=>{
-        console.log("data:",data);
-        ProcessData(data)
+        ProcessData(data);
         
     })
     .catch(error => {
@@ -25,24 +24,28 @@ function getDictionaryWord()
 }
 
 
-function WriteDefinition(updated_text)
-{
-    document.getElementById("definition").innerText=updated_text;
-}
-
 function ProcessData(data)
 {
-    var all_meanings="";
+    var definitionDiv=document.querySelector('.definitions');
     var word=null,phonetic=null;
     if(data && data[0])
     {
         if(data[0].word)
         {
-             word=data[0].word;
+            word=data[0].word;
+            const wordElement = document.createElement("p");
+            wordElement.textContent=word;
+            console.log("wordElement.textContent:",wordElement.textContent);
+            definitionDiv.appendChild(wordElement);
         }
+
         if(data[0].phonetic)
         {
             phonetic=data[0].phonetic;
+            const phoneticElement = document.createElement("p");
+            phoneticElement.textContent=phonetic;
+            console.log("phoneticElement.textContent:",phoneticElement.textContent);
+            definitionDiv.appendChild(phoneticElement);
         }
         
         if(data[0].meanings)
@@ -51,25 +54,25 @@ function ProcessData(data)
             meanings.forEach(meaning => {
                 if(meaning.partOfSpeech)
                 {
-                    all_meanings=all_meanings+`${meaning.partOfSpeech} \n`;
+                    const partsofspeechElement = document.createElement("p");
+                    partsofspeechElement.textContent=meaning.partOfSpeech;
+                    console.log("partsofspeechElement.textContent:",partsofspeechElement.textContent);
+                    definitionDiv.appendChild(partsofspeechElement);
                 }
                 if(meaning.definitions)
                 {
-                    console.log(meaning.definitions);
+                    console.log("meaning.definitions",meaning.definitions);
                     let definitions=meaning.definitions;
                     definitions.forEach((definition,index)=>{
-                        all_meanings=all_meanings+`${index}. ${definition.definition} \n`;
+                        const definitionElement = document.createElement("p");
+                        definitionElement.textContent=`${index+1}. ${definition.definition} `;
+                        console.log("definitionElement.textContent:",definitionElement.textContent);
+                        definitionDiv.appendChild(definitionElement);
                     });
                 }
-                   
-
             });
         }
     }
-    
-    var final_text=`Word:${word}\n Phonetic:${phonetic} \n`+all_meanings;
-    WriteDefinition(final_text);
-
 }
 
 function handleSearch()
