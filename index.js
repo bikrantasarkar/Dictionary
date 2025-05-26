@@ -1,5 +1,16 @@
 console.log("js loaded!");
 
+function removePreviousMeanings()
+{
+    // var currentDiv=document.getElementById('definitions');
+    var currentDiv=document.querySelector('.definitions');
+    while(currentDiv.firstChild)
+    {
+        currentDiv.removeChild(currentDiv.firstChild);
+    }
+
+}
+
 function showMakeSentence()
 {
     const makeSentence=document.getElementById('makeSentence');
@@ -39,6 +50,11 @@ function getDictionaryWord()
 function ProcessData(data)
 {
     var definitionDiv=document.querySelector('.definitions');
+    if(definitionDiv.hasChildNodes())
+    {
+        removePreviousMeanings();
+    }
+    
     var word=null,phonetic=null;
     if(data && data[0])
     {
