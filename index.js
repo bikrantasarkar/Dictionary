@@ -1,8 +1,20 @@
 console.log("js loaded!");
 
+function showSentenceCheck()
+{
+    const sentencecheck=document.getElementById('sentencecheck');
+    sentencecheck.style.display="block"; 
+}
+
+function handleAiSentenceClick()
+{
+    showSentenceCheck();
+}
+
+
 function removePreviousMeanings()
 {
-    // var currentDiv=document.getElementById('definitions');
+    
     var currentDiv=document.querySelector('.definitions');
     while(currentDiv.firstChild)
     {
@@ -116,4 +128,7 @@ document.getElementById("search-click").addEventListener("click",()=>{
     handleSearch();
 });
 
+document.getElementById("aisentence-click").addEventListener("click",()=>{
+    handleAiSentenceClick();
+})
 
