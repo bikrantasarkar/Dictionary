@@ -9,12 +9,12 @@ Its a basic online Dictionary app. Extra features to be added.
 🎥 **Demo Video:**
 [Watch on YouTube](https://www.youtube.com/watch?v=cxYuYQu_mY0)
 
-## 📦 Installation
+# 📦 Installation
 
-# clone the repository
+## clone the repository
 
 git clone https://github.com/bikrantasarkar/Dictionary.git
 
-# run the app
+## run the app
 
 open the index.html file in browser
